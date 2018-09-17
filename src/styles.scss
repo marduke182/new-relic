@@ -1,0 +1,95 @@
+$glutter: 30px;
+
+// Clean all default margin border etc.
+* {
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+body {
+  background-color: #f2f2f2;
+  font-family: "Helvetica Neue", serif;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.Wrapper {
+  margin: 0 auto;
+  max-width: calc(840px - 60px);
+  padding: 0 $glutter;
+}
+
+.Header {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  &-title {
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    margin-right: $glutter;
+  }
+
+  &-user {
+    color: #000;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1 0;
+  }
+
+  &-showAsList {
+    margin-left: $glutter;
+  }
+}
+
+.Hosts-container {}
+
+.Host-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.Host {
+  background-color: white;
+  width: calc(375px - 2 * #{$glutter});
+  padding: $glutter;
+  margin-top: $glutter;
+
+  &:first-child, &:nth-child(2n+1) {
+    margin-right: $glutter;
+  }
+
+  .is-list > & {
+    width: calc(100% - 2 * #{$glutter});
+    margin-right: 0px;
+  }
+
+  &-header {
+    color: #000;
+    font-weight: bold;
+  }
+  &-appsContainer {
+
+  }
+  &-appsList {
+
+  }
+  &-app {
+    background-color: white;
+    color: #4A4A4A;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin-top: 23px;
+    &Dex {
+      font-size: 13px;
+      opacity: 62%;
+      line-height: 1.5;
+      margin-right: 20px;
+    }
+  }
+}
