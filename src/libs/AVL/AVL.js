@@ -177,6 +177,30 @@ export default class {
   }
 
   /**
+   * Find a node given a value
+   * @param value
+   * @return {Node|null}
+   */
+  findNode(value) {
+    let current = this._root;
+    let score = this.score(value);
+
+    let diff =  score - this.score(current.value);
+    while(current !== null && diff !== 0) {
+      if (diff > 0) {
+        current = current.right;
+      } else {
+        current = current.left;
+      }
+      if (current) {
+        diff = score - this.score(current.value);
+      }
+    }
+
+    return current;
+  }
+
+  /**
    * Create an Iterator in reverse in order (Been a search tree === return greater elements first)
    * @return {IterableIterator<{value: *, height: *}>}
    */

@@ -5,6 +5,15 @@ beforeEach(async () => {
   consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 });
 
+const testAvl = new AVL();
+
+testAvl.insert(45);
+testAvl.insert(40);
+testAvl.insert(35);
+testAvl.insert(32);
+testAvl.insert(30);
+testAvl.insert(36);
+
 test('should add all values', async () => {
 
   const avl = new AVL();
@@ -22,6 +31,14 @@ test('should add all values', async () => {
   expect(consoleLogSpy).toBeCalledWith('45 40 36 35 32 30')
 });
 
+test('should find the node', async () => {
+  expect(testAvl.findNode(30)).toEqual(expect.objectContaining({ value: 30 }));
+});
+
+
+test('should not find the node', async () => {
+  expect(testAvl.findNode(31)).toBeNull();
+});
 
 
 /**
