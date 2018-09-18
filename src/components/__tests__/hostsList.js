@@ -9,10 +9,8 @@ const host2 = { name: '12345.host2.com' };
 const app78 = { name: 'App78', apdex: 78, version: 1, contributors: [], host: [] };
 const app90 = { name: 'App90', apdex: 90, version: 1, contributors: [], host: [] };
 
+// Mock host implementation to return an empty div dom element
 host.mockImplementation(() => document.createElement('div'));
-
-
-
 
 test('should return a dom with class Host-list', async () => {
   const hostListsDom = hostsLists({ apps: []});

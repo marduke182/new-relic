@@ -1,6 +1,12 @@
 import AVL from '../AVL';
 
-test('should delete 35', async () => {
+let consoleLogSpy;
+beforeEach(async () => {
+  consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+});
+
+test('should add all values', async () => {
+
   const avl = new AVL();
 
   avl.insert(45);
@@ -10,7 +16,10 @@ test('should delete 35', async () => {
   avl.insert(30);
   avl.insert(36);
 
-  expect(avl.printReverseInOrder()).toEqual('45 40 32 30')
+
+  avl.printReverseInOrder();
+
+  expect(consoleLogSpy).toBeCalledWith('45 40 36 35 32 30')
 });
 
 

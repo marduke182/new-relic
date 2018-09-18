@@ -17,8 +17,7 @@ function createHtml({ name, apps }) {
     <p>${name}</p>
   </header>
   <div class="Host-appsContainer">
-    <ul class="Host-appsList">
-      ${topFiveApps(apps)
+    <ul class="Host-appsList">${topFiveApps(apps)
         .map(
           app => `
         <li class="Host-app" data-version="${app.version}">

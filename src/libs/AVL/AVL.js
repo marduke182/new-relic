@@ -195,17 +195,6 @@ export default class {
   }
 
   printReverseInOrder() {
-    return Array.from(this.reverseInOrder(), ({ value }) => value).join(' ');
-  }
-
-  // Function to print binary tree in 2D
-  print() {
-    const separator = '         ';
-
-    return Array.from(
-      this.reverseInOrder(),
-      ({ value, height }) =>
-        `\n${Array(height).join(separator)}${this.score(value)}\n`,
-    ).join('');
+    console.log(Array.from(this.reverseInOrder(), ({ value }) => value).join(' '));
   }
 }

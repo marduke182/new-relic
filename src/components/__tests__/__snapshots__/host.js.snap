@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correct structure 1`] = `
+"
+  <header class=\\"Host-header\\">
+    <p>12345.host1.com</p>
+  </header>
+  <div class=\\"Host-appsContainer\\">
+    <ul class=\\"Host-appsList\\">
+        <li class=\\"Host-app\\" data-version=\\"1\\">
+          <div class=\\"Host-appDex\\"><p>90</p></div>
+          <div class=\\"Host-appName\\"><p>App90</p></div>
+        </li>
+        <li class=\\"Host-app\\" data-version=\\"1\\">
+          <div class=\\"Host-appDex\\"><p>78</p></div>
+          <div class=\\"Host-appName\\"><p>App78</p></div>
+        </li>
+    </ul>
+  </div>
+"
+`;
