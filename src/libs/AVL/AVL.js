@@ -37,7 +37,7 @@ export default class {
   }
 
   /**
-   *
+   * Insert a value into a node tree
    * @param {Node} node
    * @param {anything} value
    * @return {Node}
@@ -92,13 +92,17 @@ export default class {
     return node;
   }
 
+  /**
+   * Insert a value into the root element
+   * @param value
+   */
   insert(value) {
     this._root = this.insertNode(this._root, value);
     return this;
   }
 
   /**
-   *
+   * Delete a node from a node tree
    * @param {Node} node
    * @param value
    * @return {Node}
@@ -163,11 +167,19 @@ export default class {
     return node;
   }
 
+  /**
+   * Delete a value from the root tree
+   * @param value
+   */
   delete(value) {
     this._root = this.deleteNode(this._root, value);
     return this;
   }
 
+  /**
+   * Create an Iterator in reverse in order (Been a search tree === return greater elements first)
+   * @return {IterableIterator<{value: *, height: *}>}
+   */
   *reverseInOrder() {
     // Empty array return
     if (!this._root) {
@@ -194,6 +206,9 @@ export default class {
     }
   }
 
+  /**
+   * Util function tu print the respective elements in reverse in order
+   */
   printReverseInOrder() {
     console.log(Array.from(this.reverseInOrder(), ({ value }) => value).join(' '));
   }
