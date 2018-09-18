@@ -10,10 +10,22 @@ import AVL from './AVL';
  * @property {Array<string>} host
  */
 
+/**
+ * We score the avl using apdex property
+ * @param {Object} app
+ * @property {number} app.apdex
+ * @return {number}
+ */
 function score(app) {
   return app.apdex;
 }
 
+/**
+ * We store an object with apps and apdex (We support multiple apps for same apdex)
+ * @param {Object|App} store
+ * @param {App|} app
+ * @return {Object}
+ */
 function storeValue(store, app) {
   if (!app) {
     // If no store, create it. Store will be the app
@@ -59,6 +71,10 @@ export default class HostCollection {
     return hosts;
   }
 
+  /**
+   * Iterator to get all hosts
+   * @return {IterableIterator<AVL>}
+   */
   hosts() {
     return this._hosts.keys();
   }
@@ -129,6 +145,8 @@ export default class HostCollection {
     if (!hostApps) {
       return null;
     }
+
+
 
     return hostApps.delete(app);
   }
