@@ -27,7 +27,9 @@ function minValueNode(node) {
  * @typedef {Object} AVL
  * @property {Node} _root
  * @property {function} insert
+ * @property {function} delete
  * @property {function} reverseInOrder
+ * @property {function} findNode
  */
 export default class {
   constructor(score = defaultScore, storeValue = defaultStoreValue) {

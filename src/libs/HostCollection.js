@@ -11,6 +11,12 @@ import AVL from './AVL';
  */
 
 /**
+ * @typedef {Object} Store
+ * @property {Map<string, App>} apps
+ * @property {number} apdex
+ */
+
+/**
  * We score the avl using apdex property
  * @param {Object} app
  * @property {number} app.apdex
@@ -22,9 +28,9 @@ function score(app) {
 
 /**
  * We store an object with apps and apdex (We support multiple apps for same apdex)
- * @param {Object|App} store
+ * @param {Store|App} store
  * @param {App|} app
- * @return {Object}
+ * @return {Store}
  */
 function storeValue(store, app) {
   if (!app) {
@@ -80,7 +86,7 @@ export default class HostCollection {
   }
 
   /**
-   * Return 25 tops apps from a hostname.  O(H)
+   * Return 25 tops apps from a hostname.  O(log n)
    * @param hosts
    * @return {Array<App>}
    */
@@ -88,7 +94,7 @@ export default class HostCollection {
     return this.getKTopAppsByHost(hosts, 25)
   }
   /**
-   * Return a list of apps O(H + K) H is the height of the AVL tree (Map access is O(1) and reverse in order is O(H + K))
+   * Return a list of apps O(log N + K) = O(log n) (K is constant)
    * @param {string} host
    * @param {number} K
    * @return {Array<App>}
@@ -136,7 +142,7 @@ export default class HostCollection {
   }
 
   /**
-   * Remove a app from a host O(log n) = AVL big O
+   * Remove a app from a host O(log n + log n) = O(log n)
    * @param {string} host
    * @param {App} app
    */
@@ -146,8 +152,18 @@ export default class HostCollection {
       return null;
     }
 
+    // O(Log n) to get the value
+    const node = hostApps.findNode(app.apdex);
+    if (!node) {
+      return null;
+    }
 
+    // If I have multiples apps in the index, remove from map first
+    if (node.apps.size > 1) {
+      return node.apps.delete(app.name);
+    }
 
+    // If only have one app store it in this index, remove apdex from tree, O(log n)
     return hostApps.delete(app);
   }
 
