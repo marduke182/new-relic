@@ -24,6 +24,6 @@ Steps:
 
 I'am using an AVL to do insertion-deletion it was the most efficient way I found it. I tried a sorted array using binary search to insert the element, but the insertion or deletion increase to O(n) in the worst case (We had to re-arrange all array index), with the binary tree both operation can be done on O(log n). Of course,retrieving 25 first elements in an array is constant O(1), and using binary tree is O(log n).
 
-The initial load is O (N * M) where N is the num of apps and M the num of hostnames. But It's the minimum value possible because we are force to iterate.
+The initial load is O (N * M) where N is the num of apps and M the num of hostnames. But It's the minimum value possible because we are force to iterate for each app and hosts.
 
 In space I am using O(N * M), we are doing a copy of each app for each hostname in his given AVL tree.
