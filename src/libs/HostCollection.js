@@ -153,13 +153,13 @@ export default class HostCollection {
     }
 
     // O(Log n) to get the value
-    const node = hostApps.findNode(app.apdex);
+    const node = hostApps.findNode(app);
     if (!node) {
       return null;
     }
 
     // If I have multiples apps in the index, remove from map first
-    if (node.apps.size > 1) {
+    if (node.value.apps.size > 1) {
       return node.apps.delete(app.name);
     }
 
