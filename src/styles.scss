@@ -16,8 +16,9 @@ body {
 
 .Wrapper {
   margin: 0 auto;
-  max-width: calc(840px - 60px);
+  max-width: 840px;
   padding: 0 $glutter;
+  box-sizing: border-box;
 }
 
 .Header {
@@ -55,16 +56,16 @@ body {
 }
 .Host {
   background-color: white;
-  width: calc(375px - 2 * #{$glutter});
+  width: 375px;
   padding: $glutter;
   margin-top: $glutter;
+  box-sizing: border-box;
 
   &:first-child, &:nth-child(2n+1) {
     margin-right: $glutter;
   }
 
   .is-list > & {
-    width: calc(100% - 2 * #{$glutter});
     margin-right: 0px;
   }
 
