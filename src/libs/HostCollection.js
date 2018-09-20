@@ -11,42 +11,6 @@ import AVL from './AVL';
  */
 
 /**
- * @typedef {Object} Store
- * @property {Map<string, App>} apps
- * @property {number} apdex
- */
-
-/**
- * We score the avl using apdex property
- * @param {Object} app
- * @property {number} app.apdex
- * @return {number}
- */
-function score(app) {
-  return app.apdex;
-}
-
-/**
- * We store an object with apps and apdex (We support multiple apps for same apdex)
- * @param {Store|App} store
- * @param {App|} app
- * @return {Store}
- */
-function storeValue(store, app) {
-  if (!app) {
-    // If no store, create it. Store will be the app
-    app = store;
-    store = {
-      apps: new Map(),
-      apdex: app.apdex,
-    };
-  }
-
-  store.apps.set(app.name, app);
-  return store;
-}
-
-/**
  * @typedef {Object} HostCollection
  * @property {Map<AVL>} _hosts
  */
