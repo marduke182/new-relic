@@ -108,11 +108,11 @@ export default class HostCollection {
     let counter = 0;
 
     const top25Apps = [];
-    const reverseIterable = hostApps.reverseInOrder();
+    const reverseIterable = hostApps.avl.reverseInOrder();
     let { value: node, done} = reverseIterable.next();
     while(counter < K && !done) {
       // get all apps in current index
-      const appsIterator = node.value.apps.values();
+      const appsIterator = hostApps.apps.get(node.value).values();
       let app = appsIterator.next();
       while (counter < K && !app.done) {
         top25Apps.push(app.value);
@@ -134,11 +134,19 @@ export default class HostCollection {
   addAppToHosts(host, app) {
     let hostApps = this._hosts.get(host);
     if (!hostApps) {
-      hostApps = new AVL(score, storeValue);
+      hostApps = {
+        avl: new AVL(),
+        apps: new Map(),
+      };
       this._hosts.set(host, hostApps);
     }
 
-    return hostApps.insert(app);
+    if (!hostApps.apps.has(app.apdex)) {
+      hostApps.apps.set(app.apdex, new Map());
+    }
+
+    hostApps.apps.get(app.apdex).set(app.name, app); // store it in our map of apps
+    return hostApps.avl.insert(app.apdex);
   }
 
   /**
@@ -152,19 +160,18 @@ export default class HostCollection {
       return null;
     }
 
-    // O(Log n) to get the value
-    const node = hostApps.findNode(app);
-    if (!node) {
-      return null;
+    const appsInApdex = hostApps.apps.get(app.apdex);
+    if (appsInApdex && !appsInApdex.has(app.name)) {
+      return null; // If we dont have it store it stop the process
     }
 
-    // If I have multiples apps in the index, remove from map first
-    if (node.value.apps.size > 1) {
-      return node.apps.delete(app.name);
-    }
+    appsInApdex.delete(app.name);
+
 
     // If only have one app store it in this index, remove apdex from tree, O(log n)
-    return hostApps.delete(app);
+    if (appsInApdex.size === 0) {
+      hostApps.avl.delete(app);
+    }
   }
 
 }
